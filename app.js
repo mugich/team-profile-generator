@@ -74,7 +74,7 @@ chooseMember();
             // employees.push(newEngineer);
             console.log(newEngineer);  
             team.push(newEngineer); 
-            addUser()                   
+            addMember();                   
              
           });
           break;
@@ -91,7 +91,7 @@ chooseMember();
               let newManager = new Manager(response.firstName, response.id, response.email, res.officeNumber);              
               console.log(newManager);
               team.push(newManager);
-              addUser()
+              addMember();
             });
           break;
            case "Intern":
@@ -107,7 +107,7 @@ chooseMember();
             let newIntern = new Intern(response.firstName, response.id, response.email, res.school);              
               console.log(newIntern);
               team.push(newIntern);
-              addUser()
+              addMember();
             });
           break;
           default:
@@ -119,7 +119,7 @@ chooseMember();
       
 
     }
-    function addUser(){
+    function addMember(){
       inquirer.prompt([
           {   
               name: "continue",
