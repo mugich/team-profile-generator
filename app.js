@@ -13,104 +13,137 @@ const { type } = require("os");
 
 
 // Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-const array = [];
+const team = [];
+
+// console.log(employees);
+
+
+
 function chooseMember (){
   inquirer.prompt([
     {
       type: "list",
-      message: "What is your role?",
+      message: "Select team member's role?",
       choices: ["Manager", "Engineer", "Intern"],
       name: "role",
-    }
-    
-
+    }    
   ]).then(response => {
         
-    const type = response 
-    askForQuestions(type);    
+    const chosenRole = response; 
+    askForQuestions(chosenRole); 
+      
      
   });
+  
 }
-
 chooseMember();
 
 
-  function askForQuestions(type) {
+  function askForQuestions(data) {
     inquirer
     .prompt([
       {
         type: "input",
-        message: "What is your name?",
+        message: "Enter team member's name?",
         name: "firstName",
       },
       {
         type: "input",
-        message: "What is your ID number?",
+        message: "Enter team member's ID number?",
         name: "id",
       },
       {
         type: "input",
-        message: "What is your email?",
+        message: "Enter team member's email?",
         name: "email",
-      }
-       
+      }    
       ]).then(response => {
- 
-        switch(type.role){
+               
+        switch(data.role){
           case "Engineer": 
           inquirer.prompt([
             {
               type: "input",
-              message: "What is your gitHub?",             
+              message: "Enter team member's gitHub?",             
               name: "gitHub",
             }           
         
           ]).then(res => {
-                           
-            const engineer = new Engineer(response.firstName, response.id, response.email, res.gitHub);              
-             console.log(engineer);
+            //    // and to create objects for each team member (using the correct classes as blueprints!)            
+            let newEngineer = new Engineer(response.firstName, response.id, response.email, res.gitHub);
+            // employees.push(newEngineer);
+            console.log(newEngineer);  
+            team.push(newEngineer); 
+            addUser()                   
+             
           });
           break;
           case "Manager":
             inquirer.prompt([
               {
                 type: "input",
-                message: "What is your office number?",             
+                message: "Enter manager's Office number?",             
                 name: "officeNumber",
               }           
           
             ]).then(res => {                  
-             
-              const manager = new Manager(response.firstName, response.id, response.email, res.officeNumber);              
-              console.log(manager);
+             // and to create objects for each team member (using the correct classes as blueprints!)
+              let newManager = new Manager(response.firstName, response.id, response.email, res.officeNumber);              
+              console.log(newManager);
+              team.push(newManager);
+              addUser()
             });
           break;
            case "Intern":
             inquirer.prompt([
               {
                 type: "input",
-                message: "What is your office school?",             
+                message: "Enter intern's school?",             
                 name: "school",
               }           
           
             ]).then(res => {                  
-             
-              const intern = new Intern(response.firstName, response.id, response.email, res.school);              
-              console.log(intern);
+             // and to create objects for each team member (using the correct classes as blueprints!)
+            let newIntern = new Intern(response.firstName, response.id, response.email, res.school);              
+              console.log(newIntern);
+              team.push(newIntern);
+              addUser()
             });
           break;
+          default:
+          
         }  
-
+         
       });
+    
+      
 
     }
+    function addUser(){
+      inquirer.prompt([
+          {   
+              name: "continue",
+              message: "Do you want to add another team member?",
+              type: "confirm"
+          }
+      ]).then(function(confirmRes){
+          confirmRes.continue ? chooseMember() : 
+
+          fs.writeFile(outputPath, render(team), err =>{
+            if(err){
+                throw err
+            }
+            console.log("Success!")
+        });
+         
+
+      })
+  };
 
  
-     
  
  
- render(manager);
+    
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
