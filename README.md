@@ -1,6 +1,6 @@
 # Project Description "team-profile-generator" 
 
-This team generator command line application run in node. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. This application passed all unit tests and  will create an HTML file that displays a nicely formatted team roster based on the information provided by the user. 
+This team profile generator command line application run in node. The application will prompt the user for information about the team manager and then information about the team members. The user can input any number of team members, and they may be a mix of engineers and interns. This application passed all unit tests and  will create an HTML file that displays a nicely formatted team roster based on the information provided by the user. 
 
 The dependencies are, [jest](https://jestjs.io/) for running the provided tests, and [inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user.
  HTML templates for each type of user.
