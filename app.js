@@ -11,13 +11,10 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const { type } = require("os");
 
-
 // Write code to use inquirer to gather information about the development team members,
 const team = [];
 
 // console.log(employees);
-
-
 
 function chooseMember (){
   inquirer.prompt([
@@ -30,14 +27,11 @@ function chooseMember (){
   ]).then(response => {
         
     const chosenRole = response; 
-    askForQuestions(chosenRole); 
-      
-     
+    askForQuestions(chosenRole);        
   });
   
 }
 chooseMember();
-
 
   function askForQuestions(data) {
     inquirer
@@ -110,13 +104,10 @@ chooseMember();
               addMember();
             });
           break;
-          default:
-          
+          default:         
         }  
          
-      });
-    
-      
+      });     
 
     }
     function addMember(){
@@ -133,16 +124,10 @@ chooseMember();
             if(err){
                 throw err
             }
-            console.log("Success!")
-        });
-         
-
+            console.log("Your html file has been created!")
+        });        
       })
   };
-
- 
- 
- 
     
 
 // After the user has input all employees desired, call the `render` function (required
